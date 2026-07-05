@@ -26,13 +26,13 @@ Step-by-step implementation plan derived from the decisions in `docs/adr/`. Orga
 
 ## 3. Web layer (Flask, `ADR-003`, `ADR-004`)
 
-- [ ] Scaffold the Flask app factory and blueprint(s).
-- [ ] Build the create-paste flow: GET form route + Jinja2 template, POST route that validates input, calls the data layer, and redirects to the new paste's view URL.
-- [ ] Wire `Flask-WTF` CSRF protection on the create form.
-- [ ] Build the view-paste flow: GET route by `paste_id`, Jinja2 template rendering the raw text plus Open Graph meta tags for link unfurling (`ADR-003`).
-- [ ] Handle not-found IDs (404 page).
-- [ ] Set `Cache-Control: public, max-age=31536000, immutable` on the view route response.
-- [ ] Add any partial-update interactions (e.g. copy-to-clipboard feedback) via `jinja2-fragments` + htmx rather than full page reloads.
+- [x] Scaffold the Flask app factory and blueprint(s). — single `create_app()` factory in `src/copypaste/app.py`; no blueprints yet (only 3 routes, would be premature).
+- [x] Build the create-paste flow: GET form route + Jinja2 template, POST route that validates input, calls the data layer, and redirects to the new paste's view URL.
+- [x] Wire `Flask-WTF` CSRF protection on the create form.
+- [x] Build the view-paste flow: GET route by `paste_id`, Jinja2 template rendering the raw text plus Open Graph meta tags for link unfurling (`ADR-003`).
+- [x] Handle not-found IDs (404 page).
+- [x] Set `Cache-Control: public, max-age=31536000, immutable` on the view route response.
+- [ ] Add any partial-update interactions (e.g. copy-to-clipboard feedback) via `jinja2-fragments` + htmx rather than full page reloads. — deferred, UI polish, not part of this vertical slice.
 
 ## 4. Testing (`ADR-002`)
 
