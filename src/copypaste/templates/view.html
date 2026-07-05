@@ -10,10 +10,27 @@
 </head>
 <body>
   {% if paste.title %}<h1>{{ paste.title }}</h1>{% endif %}
-  {% if highlighted %}
-    {{ highlighted | safe }}
-  {% else %}
-    <pre>{{ paste.content }}</pre>
-  {% endif %}
+  <div class="paste-actions">
+    <a href="{{ url_for('raw_paste', paste_id=paste_id) }}">raw</a>
+    <button type="button" id="copy-button">copy</button>
+  </div>
+  <div id="paste-content">
+    {% if highlighted %}
+      {{ highlighted | safe }}
+    {% else %}
+      <pre>{{ paste.content }}</pre>
+    {% endif %}
+  </div>
+  <script>
+    document.getElementById("copy-button").addEventListener("click", function () {
+      var text = document.getElementById("paste-content").textContent;
+      navigator.clipboard.writeText(text).then(function () {
+        var button = document.getElementById("copy-button");
+        var original = button.textContent;
+        button.textContent = "copied!";
+        setTimeout(function () { button.textContent = original; }, 1500);
+      });
+    });
+  </script>
 </body>
 </html>
