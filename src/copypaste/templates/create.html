@@ -7,6 +7,10 @@
 <body>
   <form method="post">
     {{ form.hidden_tag() }}
+    {{ form.title(placeholder="Paste Name / Title (optional)") }}
+    {% for error in form.title.errors %}
+      <p class="error">{{ error }}</p>
+    {% endfor %}
     {{ form.content(rows=20, cols=80) }}
     {% for error in form.content.errors %}
       <p class="error">{{ error }}</p>

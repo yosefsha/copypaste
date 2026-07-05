@@ -51,6 +51,18 @@ def test_view_existing_paste_renders_content_with_immutable_cache_header(client,
     assert response.headers["Cache-Control"] == "public, max-age=31536000, immutable"
 
 
+def test_post_create_with_title_renders_title_on_view_page(client):
+    form_html = client.get("/").get_data(as_text=True)
+    csrf_token = _extract_csrf_token(form_html)
+
+    create_response = client.post(
+        "/", data={"content": "hello world", "title": "My Paste", "csrf_token": csrf_token}
+    )
+    view_response = client.get(create_response.headers["Location"])
+
+    assert b"My Paste" in view_response.data
+
+
 def test_view_unknown_paste_returns_404(client):
     response = client.get("/nonexist")
 
