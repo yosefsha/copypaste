@@ -4,25 +4,25 @@ Step-by-step implementation plan derived from the decisions in `docs/adr/`. Orga
 
 ## 0. Open decision to confirm before starting
 
-- [ ] Confirm the paste content size cap (380KB was proposed, driven by DynamoDB's 400KB item limit — `ADR-002`) — not yet formally confirmed.
+- [x] Confirm the paste content size cap (380KB was proposed, driven by DynamoDB's 400KB item limit — `ADR-002`) — confirmed: 380KB (388,096 bytes).
 
 ## 1. Repo scaffolding
 
-- [ ] Choose Python dependency/build tool (e.g. `uv`, `poetry`, or plain `venv`+`pip`) and initialize project metadata (`pyproject.toml`).
-- [ ] Add Flask, `boto3`, `jinja2-fragments`, `Flask-WTF` as dependencies (`ADR-004`).
-- [ ] Add `Dockerfile` for the Flask app.
-- [ ] Add `docker-compose.yml` wiring the app service to `amazon/dynamodb-local` on a shared network, addressed by service name (`ADR-002`).
-- [ ] Add a `.env`/config mechanism for a configurable DynamoDB endpoint (local vs AWS) (`ADR-002`).
-- [ ] Update `CLAUDE.md` with real build/run/test commands once tooling is chosen (per its own "Status" instructions).
+- [x] Choose Python dependency/build tool (e.g. `uv`, `poetry`, or plain `venv`+`pip`) and initialize project metadata (`pyproject.toml`). — `uv`
+- [x] Add Flask, `boto3`, `jinja2-fragments`, `Flask-WTF` as dependencies (`ADR-004`).
+- [x] Add `Dockerfile` for the Flask app.
+- [x] Add `docker-compose.yml` wiring the app service to `amazon/dynamodb-local` on a shared network, addressed by service name (`ADR-002`).
+- [x] Add a `.env`/config mechanism for a configurable DynamoDB endpoint (local vs AWS) (`ADR-002`). — `DYNAMODB_ENDPOINT_URL` in `src/copypaste/config.py`
+- [x] Update `CLAUDE.md` with real build/run/test commands once tooling is chosen (per its own "Status" instructions).
 
 ## 2. Data layer
 
-- [ ] Define the DynamoDB table schema for Paste: partition key `paste_id`, attribute for content, created-at timestamp; consider a TTL attribute placeholder for future expiry (`ADR-002`).
-- [ ] Write a table-creation script/module usable against both DynamoDB Local and real DynamoDB (same code path, different endpoint) (`ADR-002`).
-- [ ] Implement base62 7-character random ID generation (`ADR-001`).
-- [ ] Implement collision-checked write: `PutItem` with `attribute_not_exists(paste_id)` condition expression, retry with a new random ID on `ConditionalCheckFailedException` (`ADR-001`).
-- [ ] Implement `get_paste(paste_id)` point-read by ID.
-- [ ] Enforce the paste size cap on write, rejecting oversized submissions before hitting DynamoDB's item limit (`ADR-002`, see open decision above).
+- [x] Define the DynamoDB table schema for Paste: partition key `paste_id`, attribute for content, created-at timestamp; consider a TTL attribute placeholder for future expiry (`ADR-002`). — no TTL attribute added yet (no expiry feature exists to use it); schema is `paste_id` (PK), `content`, `created_at`.
+- [x] Write a table-creation script/module usable against both DynamoDB Local and real DynamoDB (same code path, different endpoint) (`ADR-002`). — `src/copypaste/db.py::create_table`, idempotent.
+- [x] Implement base62 7-character random ID generation (`ADR-001`). — `src/copypaste/ids.py`.
+- [x] Implement collision-checked write: `PutItem` with `attribute_not_exists(paste_id)` condition expression, retry with a new random ID on `ConditionalCheckFailedException` (`ADR-001`). — `src/copypaste/db.py::put_paste`.
+- [x] Implement `get_paste(paste_id)` point-read by ID.
+- [x] Enforce the paste size cap on write, rejecting oversized submissions before hitting DynamoDB's item limit (`ADR-002`, see open decision above). — 380KB, `db.PasteTooLargeError`.
 
 ## 3. Web layer (Flask, `ADR-003`, `ADR-004`)
 
