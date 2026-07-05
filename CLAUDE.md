@@ -45,9 +45,15 @@ Via Docker Compose (app + `dynamodb-local` on a shared network):
 
 ## Development methodology
 
-Implement each step in [TASKS.md](./TASKS.md) using TDD: write a failing test for the behavior first,
-then write the minimum code to make it pass, then refactor. Do not write implementation code without
-a preceding failing test.
+Check out a dedicated branch off `main` for each step in [TASKS.md](./TASKS.md) (e.g. `git checkout -b
+step/<short-slug>`) before starting work on it. Don't mix multiple steps into one branch.
+
+Implement each step using TDD, following red-green-refactor:
+1. **Red** — write a failing test for the behavior first, and confirm it fails.
+2. **Green** — write the minimum code to make it pass, and confirm it passes.
+3. **Refactor** — clean up the implementation (and test, if needed) while keeping it green.
+
+Do not write implementation code without a preceding failing test.
 
 ## Further reading
 
