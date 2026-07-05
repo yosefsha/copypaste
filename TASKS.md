@@ -36,9 +36,9 @@ Step-by-step implementation plan derived from the decisions in `docs/adr/`. Orga
 
 ## 4. Testing (`ADR-002`)
 
-- [ ] Unit tests for ID generation, collision retry logic, and size-cap validation using `moto` to mock DynamoDB.
-- [ ] Integration tests for create/view flows running against `amazon/dynamodb-local` inside the Compose network.
-- [ ] Wire both test tiers into a single test-runner command, documented in `CLAUDE.md`.
+- [x] Unit tests for ID generation, collision retry logic, and size-cap validation using `moto` to mock DynamoDB. — done as part of task 2/3 (`tests/unit/`).
+- [x] Integration tests for create/view flows running against `amazon/dynamodb-local` inside the Compose network. — `tests/integration/`, fresh table created/deleted per test.
+- [x] Wire both test tiers into a single test-runner command, documented in `CLAUDE.md`. — `docker compose run --rm app pytest` (bare, no path) discovers and runs both.
 
 ## 5. Static assets & CDN
 
