@@ -29,7 +29,7 @@ class PastesNetworkStack(Stack):
             self,
             "AlbSecurityGroup",
             vpc=self.vpc,
-            description="Allow inbound HTTP only from CloudFront's origin-facing IPs",
+            description="Allow inbound HTTP only from CloudFronts origin-facing IPs",
             allow_all_outbound=True,
         )
         self.alb_security_group.add_ingress_rule(
