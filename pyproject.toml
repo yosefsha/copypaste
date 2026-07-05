@@ -25,6 +25,13 @@ dev = [
     "pytest>=9.1.1",
     "pytest-cov>=7.1.0",
 ]
+cdk = [
+    "aws-cdk-lib>=2.170.0",
+    "constructs>=10.0.0",
+]
+
+[tool.uv]
+default-groups = ["dev", "cdk"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
