@@ -32,6 +32,7 @@ class PastesComputeStack(Stack):
             directory=str(REPO_ROOT),
             file="Dockerfile",
             exclude=["cdk", ".git", ".venv", ".pytest_cache", ".playwright-mcp"],
+            platform=ecr_assets.Platform.LINUX_AMD64,
         )
 
         task_definition = ecs.FargateTaskDefinition(
