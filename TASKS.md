@@ -40,9 +40,17 @@ Step-by-step implementation plan derived from the decisions in `docs/adr/`. Orga
 - [x] Integration tests for create/view flows running against `amazon/dynamodb-local` inside the Compose network. — `tests/integration/`, fresh table created/deleted per test.
 - [x] Wire both test tiers into a single test-runner command, documented in `CLAUDE.md`. — `docker compose run --rm app pytest` (bare, no path) discovers and runs both.
 
+## 3b. Pastebin-parity metadata & polish (`ADR-006`)
+
+- [ ] Add optional `title` field: `db.py` `Paste` dataclass return type + `put_paste`/`get_paste` support, `forms.py` field, view rendering (`step/paste-title`).
+- [ ] Add optional expiration via DynamoDB TTL on `expires_at`: table TTL setup, `put_paste` support, expiry check in `get_paste`, form select (`step/paste-expiration`).
+- [ ] Add optional syntax highlighting via Pygments: `language` field, curated language `<select>`, server-rendered highlighted view with plain-`<pre>` fallback (`step/syntax-highlighting`).
+- [ ] Add `/raw/<paste_id>` plaintext route and a vanilla-JS copy-to-clipboard button on the view page (`step/copy-to-clipboard-raw-view`).
+- [ ] Dark, pastebin-style visual theme for create/view/404 templates via a plain CSS file (`step/visual-polish`).
+
 ## 5. Static assets & CDN
 
-- [ ] Identify static assets (CSS, any JS for htmx/copy button) and decide their build/bundling approach.
+- [ ] Identify static assets (CSS, any JS for htmx/copy button) and decide their build/bundling approach. — decided: plain CSS via Flask's default static folder, vanilla JS for copy-to-clipboard, no bundler (see phase 3b).
 - [ ] Provision an S3 bucket for static assets, served via CloudFront.
 - [ ] Provision the CloudFront distribution's second origin/behavior for dynamic routes (create, view, htmx fragments), pointed at the ALB (`ADR-005`).
 
