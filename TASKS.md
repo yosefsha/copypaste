@@ -50,26 +50,26 @@ Step-by-step implementation plan derived from the decisions in `docs/adr/`. Orga
 
 ## 5. Static assets & CDN
 
-- [ ] Identify static assets (CSS, any JS for htmx/copy button) and decide their build/bundling approach. — decided: plain CSS via Flask's default static folder, vanilla JS for copy-to-clipboard, no bundler (see phase 3b).
-- [ ] Provision an S3 bucket for static assets, served via CloudFront.
-- [ ] Provision the CloudFront distribution's second origin/behavior for dynamic routes (create, view, htmx fragments), pointed at the ALB (`ADR-005`).
+- [x] Identify static assets (CSS, any JS for htmx/copy button) and decide their build/bundling approach. — decided: plain CSS via Flask's default static folder, vanilla JS for copy-to-clipboard, no bundler (see phase 3b).
+- [x] Provision an S3 bucket for static assets, served via CloudFront. — `cdk/stacks/edge_stack.py::PastesEdgeStack` (S3 bucket + Origin Access Control, `/static/*` behavior).
+- [x] Provision the CloudFront distribution's second origin/behavior for dynamic routes (create, view, htmx fragments), pointed at the ALB (`ADR-005`). — `PastesEdgeStack`'s default behavior, `LoadBalancerV2Origin`.
 
-## 6. Compute & networking (`ADR-005`)
+## 6. Compute & networking (`ADR-005`, `ADR-007`)
 
-- [ ] Write the ECS Fargate task definition for the Flask app (container image, gunicorn entrypoint, env vars for DynamoDB endpoint/region).
-- [ ] Provision the ECS service/cluster.
-- [ ] Provision the Application Load Balancer in front of the Fargate service, with health checks against a `/healthz` route.
-- [ ] Point CloudFront's non-static-route origin at the ALB.
+- [x] Write the ECS Fargate task definition for the Flask app (container image, gunicorn entrypoint, env vars for DynamoDB endpoint/region). — `cdk/stacks/compute_stack.py::PastesComputeStack`.
+- [x] Provision the ECS service/cluster. — `PastesComputeStack`.
+- [x] Provision the Application Load Balancer in front of the Fargate service, with health checks against a `/healthz` route. — `PastesComputeStack`.
+- [x] Point CloudFront's non-static-route origin at the ALB. — `PastesEdgeStack`.
 
 ## 7. Abuse prevention
 
-- [ ] Create an AWS WAF Web ACL with a rate-based rule on the create route, attached to the CloudFront distribution.
+- [x] Create an AWS WAF Web ACL with a rate-based rule on the create route, attached to the CloudFront distribution. — `cdk/stacks/waf_stack.py::PastesWafStack`, associated in `PastesEdgeStack`.
 
 ## 8. Deployment / CI
 
 - [ ] Set up CI to run unit + integration tests on every push.
 - [ ] Set up build/push of the container image to a registry (e.g. ECR).
-- [ ] Set up deployment of infra (IaC tool TBD — not yet chosen) and app releases to Fargate.
+- [x] Set up deployment of infra and app releases to Fargate via **AWS CDK (Python)** — IaC tool decided (was TBD, see `ADR-007`). `cdk/` directory, own `uv`-managed project. Stacks: `PastesDataStack` (DynamoDB), `PastesNetworkStack` (VPC, no NAT gateway — public subnets + security group locked to CloudFront's origin-facing prefix list), `PastesComputeStack` (ECR image asset built from the existing `Dockerfile`, ECS/Fargate, ALB), `PastesWafStack` (WAFv2 Web ACL, rate-based rule on the create route), `PastesEdgeStack` (CloudFront, default `*.cloudfront.net` domain — custom domain/DNS explicitly out of scope, S3 static origin).
 
 ## Deferred (see `Features.md`)
 
