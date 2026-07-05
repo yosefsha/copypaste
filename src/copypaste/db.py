@@ -1,3 +1,4 @@
+from dataclasses import dataclass
 from datetime import datetime, timezone
 
 import boto3
@@ -12,6 +13,12 @@ MAX_ID_ALLOCATION_ATTEMPTS = 5
 
 class PasteTooLargeError(Exception):
     pass
+
+
+@dataclass(frozen=True)
+class Paste:
+    content: str
+    title: str | None = None
 
 
 def get_resource():
@@ -37,7 +44,7 @@ def create_table(resource, table_name=None):
     return table
 
 
-def put_paste(table, content: str) -> str:
+def put_paste(table, content: str, title: str | None = None) -> str:
     content_bytes = len(content.encode("utf-8"))
     if content_bytes > MAX_PASTE_SIZE_BYTES:
         raise PasteTooLargeError(
@@ -46,11 +53,15 @@ def put_paste(table, content: str) -> str:
 
     created_at = datetime.now(timezone.utc).isoformat()
 
+    item = {"content": content, "created_at": created_at}
+    if title:
+        item["title"] = title
+
     for _ in range(MAX_ID_ALLOCATION_ATTEMPTS):
         paste_id = generate_id()
         try:
             table.put_item(
-                Item={"paste_id": paste_id, "content": content, "created_at": created_at},
+                Item={"paste_id": paste_id, **item},
                 ConditionExpression="attribute_not_exists(paste_id)",
             )
             return paste_id
@@ -61,7 +72,9 @@ def put_paste(table, content: str) -> str:
     raise RuntimeError("failed to allocate a unique paste id after retries")
 
 
-def get_paste(table, paste_id: str) -> str | None:
+def get_paste(table, paste_id: str) -> Paste | None:
     response = table.get_item(Key={"paste_id": paste_id})
     item = response.get("Item")
-    return item["content"] if item else None
+    if not item:
+        return None
+    return Paste(content=item["content"], title=item.get("title"))

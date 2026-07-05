@@ -14,7 +14,17 @@ def table():
 def test_put_and_get_paste_round_trip(table):
     paste_id = db.put_paste(table, "hello world")
 
-    assert db.get_paste(table, paste_id) == "hello world"
+    paste = db.get_paste(table, paste_id)
+    assert paste.content == "hello world"
+    assert paste.title is None
+
+
+def test_put_and_get_paste_with_title(table):
+    paste_id = db.put_paste(table, "hello world", title="My Paste")
+
+    paste = db.get_paste(table, paste_id)
+    assert paste.content == "hello world"
+    assert paste.title == "My Paste"
 
 
 def test_get_paste_returns_none_for_unknown_id(table):

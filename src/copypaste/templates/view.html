@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>copypaste</title>
+  <title>{{ paste.title or "copypaste" }}</title>
   <meta property="og:type" content="website">
-  <meta property="og:title" content="copypaste">
-  <meta property="og:description" content="{{ content[:200] }}">
+  <meta property="og:title" content="{{ paste.title or "copypaste" }}">
+  <meta property="og:description" content="{{ paste.content[:200] }}">
 </head>
 <body>
-  <pre>{{ content }}</pre>
+  {% if paste.title %}<h1>{{ paste.title }}</h1>{% endif %}
+  <pre>{{ paste.content }}</pre>
 </body>
 </html>

@@ -32,7 +32,9 @@ def create_app(table=None) -> Flask:
             return render_template("create.html", form=form), 400
 
         try:
-            paste_id = db.put_paste(current_app.config["PASTE_TABLE"], form.content.data)
+            paste_id = db.put_paste(
+                current_app.config["PASTE_TABLE"], form.content.data, title=form.title.data
+            )
         except db.PasteTooLargeError:
             max_kb = db.MAX_PASTE_SIZE_BYTES // 1024
             form.content.errors.append(f"Paste is too large (max {max_kb}KB).")
@@ -42,11 +44,11 @@ def create_app(table=None) -> Flask:
 
     @app.get("/<paste_id>")
     def view_paste(paste_id):
-        content = db.get_paste(current_app.config["PASTE_TABLE"], paste_id)
-        if content is None:
+        paste = db.get_paste(current_app.config["PASTE_TABLE"], paste_id)
+        if paste is None:
             return render_template("404.html"), 404
 
-        response = make_response(render_template("view.html", content=content))
+        response = make_response(render_template("view.html", paste=paste))
         response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
         return response
 
