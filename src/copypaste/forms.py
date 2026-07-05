@@ -11,8 +11,22 @@ EXPIRATION_CHOICES_SECONDS = [
     ("2592000", "1 Month"),
 ]
 
+LANGUAGE_CHOICES = [
+    ("text", "Plain Text"),
+    ("python", "Python"),
+    ("javascript", "JavaScript"),
+    ("bash", "Bash"),
+    ("json", "JSON"),
+    ("html", "HTML"),
+    ("css", "CSS"),
+    ("sql", "SQL"),
+    ("yaml", "YAML"),
+    ("markdown", "Markdown"),
+]
+
 
 class CreatePasteForm(FlaskForm):
     content = TextAreaField("content", validators=[DataRequired()])
     title = StringField("title", validators=[Optional(), Length(max=255)])
     expiration = SelectField("expiration", choices=EXPIRATION_CHOICES_SECONDS, default="")
+    language = SelectField("language", choices=LANGUAGE_CHOICES, default="text")

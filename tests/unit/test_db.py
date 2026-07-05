@@ -65,3 +65,17 @@ def test_get_paste_returns_paste_that_has_not_expired_yet(table):
     paste_id = db.put_paste(table, "hello world", expires_in_seconds=3600)
 
     assert db.get_paste(table, paste_id).content == "hello world"
+
+
+def test_put_and_get_paste_with_language(table):
+    paste_id = db.put_paste(table, "print('hi')", language="python")
+
+    paste = db.get_paste(table, paste_id)
+    assert paste.content == "print('hi')"
+    assert paste.language == "python"
+
+
+def test_put_and_get_paste_without_language(table):
+    paste_id = db.put_paste(table, "hello world")
+
+    assert db.get_paste(table, paste_id).language is None
