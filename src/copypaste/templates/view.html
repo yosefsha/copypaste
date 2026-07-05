@@ -6,9 +6,14 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ paste.title or "copypaste" }}">
   <meta property="og:description" content="{{ paste.content[:200] }}">
+  {% if highlighted %}<link rel="stylesheet" href="{{ url_for('static', filename='pygments.css') }}">{% endif %}
 </head>
 <body>
   {% if paste.title %}<h1>{{ paste.title }}</h1>{% endif %}
-  <pre>{{ paste.content }}</pre>
+  {% if highlighted %}
+    {{ highlighted | safe }}
+  {% else %}
+    <pre>{{ paste.content }}</pre>
+  {% endif %}
 </body>
 </html>
