@@ -31,9 +31,13 @@ def create_app(table=None) -> Flask:
         if not form.validate_on_submit():
             return render_template("create.html", form=form), 400
 
+        expires_in_seconds = int(form.expiration.data) if form.expiration.data else None
         try:
             paste_id = db.put_paste(
-                current_app.config["PASTE_TABLE"], form.content.data, title=form.title.data
+                current_app.config["PASTE_TABLE"],
+                form.content.data,
+                title=form.title.data,
+                expires_in_seconds=expires_in_seconds,
             )
         except db.PasteTooLargeError:
             max_kb = db.MAX_PASTE_SIZE_BYTES // 1024

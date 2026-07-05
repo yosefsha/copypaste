@@ -47,3 +47,21 @@ def test_put_paste_rejects_oversized_content(table):
 
     with pytest.raises(db.PasteTooLargeError):
         db.put_paste(table, oversized)
+
+
+def test_put_and_get_paste_with_no_expiration(table):
+    paste_id = db.put_paste(table, "hello world")
+
+    assert db.get_paste(table, paste_id).content == "hello world"
+
+
+def test_get_paste_returns_none_for_expired_paste(table):
+    paste_id = db.put_paste(table, "hello world", expires_in_seconds=-1)
+
+    assert db.get_paste(table, paste_id) is None
+
+
+def test_get_paste_returns_paste_that_has_not_expired_yet(table):
+    paste_id = db.put_paste(table, "hello world", expires_in_seconds=3600)
+
+    assert db.get_paste(table, paste_id).content == "hello world"
