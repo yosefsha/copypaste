@@ -53,6 +53,9 @@ Implement each step using TDD, following red-green-refactor:
 2. **Green** — write the minimum code to make it pass, and confirm it passes.
 3. **Refactor** — clean up the implementation (and test, if needed) while keeping it green.
 
+Push each step's branch and open a PR. Never merge to `main` without explicit human approval — not
+even when tests pass and the change looks safe.
+
 Do not write implementation code without a preceding failing test.
 
 ## Further reading
