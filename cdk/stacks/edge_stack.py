@@ -1,8 +1,13 @@
+from pathlib import Path
+
 from aws_cdk import CfnOutput, RemovalPolicy, Stack
 from aws_cdk import aws_cloudfront as cloudfront
 from aws_cdk import aws_cloudfront_origins as origins
 from aws_cdk import aws_s3 as s3
+from aws_cdk import aws_s3_deployment as s3_deployment
 from constructs import Construct
+
+STATIC_DIR = Path(__file__).resolve().parents[2] / "src" / "copypaste" / "static"
 
 
 class PastesEdgeStack(Stack):
@@ -46,5 +51,15 @@ class PastesEdgeStack(Stack):
         )
 
         self.static_bucket = static_bucket
+
+        s3_deployment.BucketDeployment(
+            self,
+            "DeployStaticAssets",
+            sources=[s3_deployment.Source.asset(str(STATIC_DIR))],
+            destination_bucket=static_bucket,
+            destination_key_prefix="static",
+            distribution=self.distribution,
+            distribution_paths=["/static/*"],
+        )
 
         CfnOutput(self, "DistributionDomainName", value=self.distribution.distribution_domain_name)
