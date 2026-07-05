@@ -15,6 +15,27 @@ def test_get_create_form_renders_textarea(client):
     assert b"<textarea" in response.data
 
 
+def test_get_create_form_includes_stylesheet(client):
+    response = client.get("/")
+
+    assert b'rel="stylesheet"' in response.data
+    assert b"style.css" in response.data
+
+
+def test_view_paste_includes_stylesheet(client, dynamodb_table):
+    paste_id = db.put_paste(dynamodb_table, "hello world")
+
+    response = client.get(f"/{paste_id}")
+
+    assert b"style.css" in response.data
+
+
+def test_404_page_includes_stylesheet(client):
+    response = client.get("/nonexist")
+
+    assert b"style.css" in response.data
+
+
 def test_post_create_redirects_to_view_url(client):
     form_html = client.get("/").get_data(as_text=True)
     csrf_token = _extract_csrf_token(form_html)

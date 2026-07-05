@@ -3,8 +3,17 @@
 <head>
   <meta charset="utf-8">
   <title>copypaste</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <h1>Paste not found</h1>
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('create_form') }}">copy<span>paste</span></a>
+  </header>
+  <main>
+    <div class="not-found">
+      <h1>Paste not found</h1>
+      <p><a href="{{ url_for('create_form') }}">Create a new paste</a></p>
+    </div>
+  </main>
 </body>
 </html>

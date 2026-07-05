@@ -3,23 +3,37 @@
 <head>
   <meta charset="utf-8">
   <title>copypaste</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <form method="post">
-    {{ form.hidden_tag() }}
-    {{ form.title(placeholder="Paste Name / Title (optional)") }}
-    {% for error in form.title.errors %}
-      <p class="error">{{ error }}</p>
-    {% endfor %}
-    {{ form.content(rows=20, cols=80) }}
-    {% for error in form.content.errors %}
-      <p class="error">{{ error }}</p>
-    {% endfor %}
-    <label for="{{ form.expiration.id }}">Paste Expiration:</label>
-    {{ form.expiration() }}
-    <label for="{{ form.language.id }}">Syntax Highlighting:</label>
-    {{ form.language() }}
-    <button type="submit">Create paste</button>
-  </form>
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('create_form') }}">copy<span>paste</span></a>
+  </header>
+  <main>
+    <div class="card">
+      <form method="post">
+        {{ form.hidden_tag() }}
+        {{ form.title(placeholder="Paste Name / Title (optional)") }}
+        {% for error in form.title.errors %}
+          <p class="error">{{ error }}</p>
+        {% endfor %}
+        {{ form.content(rows=20, cols=80) }}
+        {% for error in form.content.errors %}
+          <p class="error">{{ error }}</p>
+        {% endfor %}
+        <div class="settings-row">
+          <div class="field">
+            <label for="{{ form.expiration.id }}">Paste Expiration:</label>
+            {{ form.expiration() }}
+          </div>
+          <div class="field">
+            <label for="{{ form.language.id }}">Syntax Highlighting:</label>
+            {{ form.language() }}
+          </div>
+        </div>
+        <button type="submit">Create paste</button>
+      </form>
+    </div>
+  </main>
 </body>
 </html>
