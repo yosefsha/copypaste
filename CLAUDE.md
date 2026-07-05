@@ -10,12 +10,38 @@ persistent (durable storage) and cached for fast repeated access.
 
 ## Status
 
-This repository is unstarted — no tech stack, dependencies, or code have been chosen yet. Do not
-assume a language, framework, or database. Confirm these with the user before scaffolding anything.
+Scaffolded. Stack: Python 3.13, Flask, `boto3`, `jinja2-fragments`, `Flask-WTF`, managed with `uv`.
+See `docs/adr/` for the decisions behind these choices, and `TASKS.md` for the implementation plan.
 
-Once the stack is chosen and the project is scaffolded, update this file with:
-- Build / lint / test / run commands (including how to run a single test)
-- Architecture notes: how paste creation, short-URL generation/lookup, persistence, and caching fit together
+## Stack
+
+- **Language/runtime**: Python 3.13
+- **Package manager**: `uv` (`pyproject.toml` + `uv.lock`)
+- **Web framework**: Flask (`ADR-004`), server-rendered Jinja2 templates (`ADR-003`)
+- **Datastore**: DynamoDB via `boto3`, local dev/test via `amazon/dynamodb-local` in Docker Compose (`ADR-002`)
+- **App layout**: `src/copypaste/` (package), `tests/unit/`, `tests/integration/`
+
+## Commands
+
+Local (no Docker), using the `uv`-managed virtualenv:
+- Install deps: `uv sync`
+- Run unit tests: `uv run pytest tests/unit`
+- Run a single test: `uv run pytest tests/unit/test_health.py::test_healthz_returns_ok`
+- Run the dev server: `uv run flask --app copypaste.app:create_app run`
+
+Via Docker Compose (app + `dynamodb-local` on a shared network):
+- Build: `docker compose build`
+- Start the stack: `docker compose up -d` (app on `http://localhost:8080`)
+- Stop the stack: `docker compose down`
+- Run unit tests in-container: `docker compose run --rm app pytest tests/unit`
+- Run integration tests (against `dynamodb-local`): `docker compose run --rm app pytest tests/integration`
+
+## Architecture notes
+
+- `src/copypaste/app.py` — Flask app factory (`create_app`), route registration.
+- `src/copypaste/config.py` — env-driven config, including `DYNAMODB_ENDPOINT_URL` (unset in prod, set to
+  `http://dynamodb-local:8000` in Compose) so the same code targets DynamoDB Local or real DynamoDB (`ADR-002`).
+- Paste creation, short-URL generation/lookup, and caching are not yet implemented — see `TASKS.md` phases 2-3.
 
 ## Development methodology
 
