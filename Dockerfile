@@ -15,4 +15,4 @@ ENV PATH="/app/.venv/bin:$PATH"
 
 EXPOSE 5000
 
-CMD ["gunicorn", "--bind", "0.0.0.0:5000", "copypaste.app:create_app()"]
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "--worker-class", "gthread", "--workers", "2", "--threads", "4", "copypaste.app:create_app()"]
