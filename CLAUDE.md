@@ -33,15 +33,21 @@ Via Docker Compose (app + `dynamodb-local` on a shared network):
 - Build: `docker compose build`
 - Start the stack: `docker compose up -d` (app on `http://localhost:8080`)
 - Stop the stack: `docker compose down`
-- Run unit tests in-container: `docker compose run --rm app pytest tests/unit`
-- Run integration tests (against `dynamodb-local`): `docker compose run --rm app pytest tests/integration`
+- Run all tests (unit + integration): `docker compose run --rm app pytest`
+- Run just unit tests: `docker compose run --rm app pytest tests/unit`
+- Run just integration tests (against real `dynamodb-local`): `docker compose run --rm app pytest tests/integration`
 
 ## Architecture notes
 
-- `src/copypaste/app.py` — Flask app factory (`create_app`), route registration.
+- `src/copypaste/app.py` — Flask app factory (`create_app`), routes for create/view/health, accepts an
+  injectable `table` for test isolation.
+- `src/copypaste/db.py` — DynamoDB access: table creation, collision-checked writes, point reads.
 - `src/copypaste/config.py` — env-driven config, including `DYNAMODB_ENDPOINT_URL` (unset in prod, set to
   `http://dynamodb-local:8000` in Compose) so the same code targets DynamoDB Local or real DynamoDB (`ADR-002`).
-- Paste creation, short-URL generation/lookup, and caching are not yet implemented — see `TASKS.md` phases 2-3.
+- `tests/unit/` mocks DynamoDB with `moto`; `tests/integration/` runs against the real `amazon/dynamodb-local`
+  engine, both driven by one `pytest` invocation (`ADR-002`).
+- Static assets/CDN, compute/networking infra, and deployment/CI are not yet implemented — see `TASKS.md`
+  phases 5-8.
 
 ## Development methodology
 
