@@ -17,6 +17,12 @@ Once the stack is chosen and the project is scaffolded, update this file with:
 - Build / lint / test / run commands (including how to run a single test)
 - Architecture notes: how paste creation, short-URL generation/lookup, persistence, and caching fit together
 
+## Development methodology
+
+Implement each step in [TASKS.md](./TASKS.md) using TDD: write a failing test for the behavior first,
+then write the minimum code to make it pass, then refactor. Do not write implementation code without
+a preceding failing test.
+
 ## Further reading
 
 - [CONTEXT.md](./CONTEXT.md) — domain glossary
