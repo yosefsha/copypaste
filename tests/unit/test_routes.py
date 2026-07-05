@@ -107,3 +107,37 @@ def test_view_paste_without_language_renders_plain_pre(client, dynamodb_table):
 
     assert b"<pre>hello world</pre>" in response.data
     assert b'class="highlight"' not in response.data
+
+
+def test_raw_view_returns_exact_content_as_plain_text(client, dynamodb_table):
+    paste_id = db.put_paste(dynamodb_table, "hello world")
+
+    response = client.get(f"/raw/{paste_id}")
+
+    assert response.status_code == 200
+    assert response.data == b"hello world"
+    assert response.headers["Content-Type"] == "text/plain; charset=utf-8"
+
+
+def test_raw_view_returns_404_for_unknown_id(client):
+    response = client.get("/raw/nonexist")
+
+    assert response.status_code == 404
+
+
+def test_raw_view_returns_404_for_expired_paste(client, dynamodb_table):
+    paste_id = db.put_paste(dynamodb_table, "hello world", expires_in_seconds=-1)
+
+    response = client.get(f"/raw/{paste_id}")
+
+    assert response.status_code == 404
+
+
+def test_view_paste_page_links_to_raw_view_and_has_copy_button(client, dynamodb_table):
+    paste_id = db.put_paste(dynamodb_table, "hello world")
+
+    response = client.get(f"/{paste_id}")
+    html = response.get_data(as_text=True)
+
+    assert f'href="/raw/{paste_id}"' in html
+    assert 'id="copy-button"' in html

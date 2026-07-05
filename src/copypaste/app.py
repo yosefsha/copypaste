@@ -1,4 +1,4 @@
-from flask import Flask, current_app, jsonify, make_response, redirect, render_template, url_for
+from flask import Flask, Response, current_app, jsonify, make_response, redirect, render_template, url_for
 from flask_wtf import CSRFProtect
 from pygments import highlight
 from pygments.formatters import HtmlFormatter
@@ -61,6 +61,16 @@ def create_app(table=None) -> Flask:
 
         return redirect(url_for("view_paste", paste_id=paste_id))
 
+    @app.get("/raw/<paste_id>")
+    def raw_paste(paste_id):
+        paste = db.get_paste(current_app.config["PASTE_TABLE"], paste_id)
+        if paste is None:
+            return render_template("404.html"), 404
+
+        response = Response(paste.content, mimetype="text/plain")
+        response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
+        return response
+
     @app.get("/<paste_id>")
     def view_paste(paste_id):
         paste = db.get_paste(current_app.config["PASTE_TABLE"], paste_id)
@@ -68,7 +78,9 @@ def create_app(table=None) -> Flask:
             return render_template("404.html"), 404
 
         highlighted = _highlight(paste)
-        response = make_response(render_template("view.html", paste=paste, highlighted=highlighted))
+        response = make_response(
+            render_template("view.html", paste=paste, paste_id=paste_id, highlighted=highlighted)
+        )
         response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
         return response
 
