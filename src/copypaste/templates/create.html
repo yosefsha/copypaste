@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>copypaste</title>
+</head>
+<body>
+  <form method="post">
+    {{ form.hidden_tag() }}
+    {{ form.content(rows=20, cols=80) }}
+    {% for error in form.content.errors %}
+      <p class="error">{{ error }}</p>
+    {% endfor %}
+    <button type="submit">Create paste</button>
+  </form>
+</body>
+</html>
