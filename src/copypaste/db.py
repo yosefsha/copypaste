@@ -20,6 +20,7 @@ class PasteTooLargeError(Exception):
 class Paste:
     content: str
     title: str | None = None
+    language: str | None = None
 
 
 def get_resource():
@@ -59,7 +60,11 @@ def create_table(resource, table_name=None):
 
 
 def put_paste(
-    table, content: str, title: str | None = None, expires_in_seconds: int | None = None
+    table,
+    content: str,
+    title: str | None = None,
+    expires_in_seconds: int | None = None,
+    language: str | None = None,
 ) -> str:
     content_bytes = len(content.encode("utf-8"))
     if content_bytes > MAX_PASTE_SIZE_BYTES:
@@ -74,6 +79,8 @@ def put_paste(
         item["title"] = title
     if expires_in_seconds is not None:
         item["expires_at"] = int(time.time()) + expires_in_seconds
+    if language:
+        item["language"] = language
 
     for _ in range(MAX_ID_ALLOCATION_ATTEMPTS):
         paste_id = generate_id()
@@ -97,4 +104,4 @@ def get_paste(table, paste_id: str) -> Paste | None:
         return None
     if "expires_at" in item and item["expires_at"] <= int(time.time()):
         return None
-    return Paste(content=item["content"], title=item.get("title"))
+    return Paste(content=item["content"], title=item.get("title"), language=item.get("language"))

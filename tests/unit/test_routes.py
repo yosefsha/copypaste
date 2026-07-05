@@ -88,3 +88,22 @@ def test_view_expired_paste_returns_404(client, dynamodb_table):
     response = client.get(f"/{paste_id}")
 
     assert response.status_code == 404
+
+
+def test_view_paste_with_language_renders_pygments_highlighting(client, dynamodb_table):
+    paste_id = db.put_paste(dynamodb_table, "print('hi')", language="python")
+
+    response = client.get(f"/{paste_id}")
+
+    assert response.status_code == 200
+    assert b'class="highlight"' in response.data
+    assert b"pygments.css" in response.data
+
+
+def test_view_paste_without_language_renders_plain_pre(client, dynamodb_table):
+    paste_id = db.put_paste(dynamodb_table, "hello world")
+
+    response = client.get(f"/{paste_id}")
+
+    assert b"<pre>hello world</pre>" in response.data
+    assert b'class="highlight"' not in response.data
