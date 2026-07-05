@@ -13,6 +13,16 @@ Pastes are currently immutable / write-once (see `CONTEXT.md`, `ADR-001`, `ADR-0
 
 Pastes over the size limit are currently rejected outright, driven by DynamoDB's 400KB item size limit (`ADR-002`). A future version could store oversized paste bodies in S3 instead, with DynamoDB holding only metadata plus a pointer to the S3 object, removing the size cap for large pastes.
 
+## Static assets via S3 + CloudFront
+
+Static assets (`style.css`, `pygments.css`) are currently served directly by Flask from
+`src/copypaste/static/`, its default static folder — sufficient at current scale. A future version
+could provision an S3 bucket for these assets and a CloudFront distribution with two
+origins/behaviors: S3 for static paths, the ALB (`ADR-005`) for dynamic routes (create, view, htmx
+fragments). This is expected to touch:
+- A deploy-time sync step (CI, `TASKS.md` phase 8) to push `src/copypaste/static/*` to S3 — the
+  files stay authored under `src/`; only the serving path changes in production.
+
 ## Auth
 
 The service is currently fully anonymous — no accounts, no sessions. A future version will add user accounts. This is expected to touch:
