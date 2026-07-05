@@ -15,6 +15,10 @@
     {% for error in form.content.errors %}
       <p class="error">{{ error }}</p>
     {% endfor %}
+    <label for="{{ form.expiration.id }}">Paste Expiration:</label>
+    {{ form.expiration() }}
+    <label for="{{ form.language.id }}">Syntax Highlighting:</label>
+    {{ form.language() }}
     <button type="submit">Create paste</button>
   </form>
 </body>

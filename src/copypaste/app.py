@@ -1,9 +1,23 @@
 from flask import Flask, current_app, jsonify, make_response, redirect, render_template, url_for
 from flask_wtf import CSRFProtect
+from pygments import highlight
+from pygments.formatters import HtmlFormatter
+from pygments.lexers import get_lexer_by_name
+from pygments.util import ClassNotFound
 
 from copypaste import db
 from copypaste.config import Config
 from copypaste.forms import CreatePasteForm
+
+
+def _highlight(paste: db.Paste) -> str | None:
+    if not paste.language or paste.language == "text":
+        return None
+    try:
+        lexer = get_lexer_by_name(paste.language)
+    except ClassNotFound:
+        return None
+    return highlight(paste.content, lexer, HtmlFormatter(nowrap=False))
 
 
 def create_app(table=None) -> Flask:
@@ -31,9 +45,14 @@ def create_app(table=None) -> Flask:
         if not form.validate_on_submit():
             return render_template("create.html", form=form), 400
 
+        expires_in_seconds = int(form.expiration.data) if form.expiration.data else None
         try:
             paste_id = db.put_paste(
-                current_app.config["PASTE_TABLE"], form.content.data, title=form.title.data
+                current_app.config["PASTE_TABLE"],
+                form.content.data,
+                title=form.title.data,
+                expires_in_seconds=expires_in_seconds,
+                language=form.language.data,
             )
         except db.PasteTooLargeError:
             max_kb = db.MAX_PASTE_SIZE_BYTES // 1024
@@ -48,7 +67,8 @@ def create_app(table=None) -> Flask:
         if paste is None:
             return render_template("404.html"), 404
 
-        response = make_response(render_template("view.html", paste=paste))
+        highlighted = _highlight(paste)
+        response = make_response(render_template("view.html", paste=paste, highlighted=highlighted))
         response.headers["Cache-Control"] = "public, max-age=31536000, immutable"
         return response
 
