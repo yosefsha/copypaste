@@ -1,0 +1,227 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e2]:
+    - generic [ref=e5]:
+      - generic [ref=e6]:
+        - link "Pastebin" [ref=e7] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e8]:
+          - link "API" [ref=e9] [cursor=pointer]:
+            - /url: /doc_api
+          - link "tools" [ref=e10] [cursor=pointer]:
+            - /url: /tools
+          - link "faq" [ref=e11] [cursor=pointer]:
+            - /url: /faq
+        - link "paste" [ref=e12] [cursor=pointer]:
+          - /url: /
+        - generic [ref=e14]:
+          - textbox "Search..." [ref=e15]
+          - button "Search" [ref=e16] [cursor=pointer]:
+            - img [ref=e17]
+      - generic [ref=e20]:
+        - link "Login" [ref=e21] [cursor=pointer]:
+          - /url: /login
+        - link "Sign up" [ref=e22] [cursor=pointer]:
+          - /url: /signup
+    - generic [ref=e23]:
+      - generic [ref=e27]:
+        - generic [ref=e28]:
+          - generic [ref=e29]:
+            - text: New Paste
+            - generic [ref=e32]: Syntax Highlighting
+          - textbox "New Paste" [ref=e36]
+          - generic [ref=e37]: Optional Paste Settings
+          - generic [ref=e38]:
+            - generic [ref=e39]:
+              - generic [ref=e40]:
+                - generic [ref=e41]: "Category:"
+                - combobox "None" [ref=e45] [cursor=pointer]:
+                  - textbox "None" [ref=e46]
+              - generic [ref=e47]:
+                - generic [ref=e48]: "Tags:"
+                - textbox "Tags" [ref=e51]:
+                  - /placeholder: ""
+              - generic [ref=e52]:
+                - generic [ref=e53]: "Syntax Highlighting:"
+                - combobox "None" [ref=e57] [cursor=pointer]:
+                  - textbox "None" [ref=e58]
+              - generic [ref=e59]:
+                - generic [ref=e60]: "Paste Expiration:"
+                - combobox "Never" [ref=e64] [cursor=pointer]:
+                  - textbox "Never" [ref=e65]
+              - generic [ref=e66]:
+                - generic [ref=e67]: "Paste Exposure:"
+                - combobox "Public" [ref=e71] [cursor=pointer]:
+                  - textbox "Public" [ref=e72]
+              - generic [ref=e74]:
+                - generic [ref=e75]: "Folder:"
+                - combobox [ref=e79] [cursor=pointer]:
+                  - textbox
+              - generic [ref=e80]:
+                - generic [ref=e81]:
+                  - text: Password
+                  - generic [ref=e82]: NEW
+                - generic [ref=e84]: Disabled
+                - textbox "Password" [disabled] [ref=e88]
+              - generic [ref=e90]:
+                - generic [ref=e91]: Burn after read
+                - generic [ref=e93]: NEW
+              - generic [ref=e94]:
+                - generic [ref=e95]: "Paste Name / Title:"
+                - textbox "Paste Name / Title:" [ref=e97]
+              - button "Create New Paste" [ref=e99] [cursor=pointer]
+            - generic [ref=e100]:
+              - generic [ref=e101]:
+                - img "Guest User" [ref=e103]
+                - generic [ref=e104]:
+                  - generic [ref=e105]: Hello Guest
+                  - generic [ref=e106]:
+                    - link "Sign Up" [ref=e107] [cursor=pointer]:
+                      - /url: /signup
+                    - text: or
+                    - link "Login" [ref=e108] [cursor=pointer]:
+                      - /url: /login
+              - generic [ref=e109]:
+                - link "Sign in with Facebook" [ref=e110] [cursor=pointer]:
+                  - /url: /site/auth-facebook
+                - link "Sign in with Twitter" [ref=e111] [cursor=pointer]:
+                  - /url: /site/auth-twitter
+                - link "Sign in with Google" [ref=e112] [cursor=pointer]:
+                  - /url: /site/auth-google
+        - generic [ref=e116]:
+          - text: You are currently not logged in, this means you can not edit or delete anything you paste.
+          - link "Sign Up" [ref=e117] [cursor=pointer]:
+            - /url: /signup
+          - text: or
+          - link "Login" [ref=e118] [cursor=pointer]:
+            - /url: /login
+      - generic [ref=e119]:
+        - link "Public Pastes" [ref=e121] [cursor=pointer]:
+          - /url: /archive
+        - list [ref=e122]:
+          - listitem [ref=e123]:
+            - link "z66is_archive.zip.txt" [ref=e124] [cursor=pointer]:
+              - /url: /y8NRZxjX?source=public_pastes
+            - generic [ref=e125]: 2 hours ago | 2.73 KB
+          - listitem [ref=e126]:
+            - link "THUMBS UP" [ref=e127] [cursor=pointer]:
+              - /url: /r3xibuc2?source=public_pastes
+            - generic [ref=e128]: 3 hours ago | 0.08 KB
+          - listitem [ref=e129]:
+            - link "https://web.archive.org/web/https://pastebin...." [ref=e130] [cursor=pointer]:
+              - /url: /yMgJmy4C?source=public_pastes
+            - generic [ref=e131]: 3 hours ago | 0.07 KB
+          - listitem [ref=e132]:
+            - link "PREPEND THIS:" [ref=e133] [cursor=pointer]:
+              - /url: /AXvTMeHV?source=public_pastes
+            - generic [ref=e134]: 3 hours ago | 0.07 KB
+          - listitem [ref=e135]:
+            - link "ADD THIS:" [ref=e136] [cursor=pointer]:
+              - /url: /xZvayL7A?source=public_pastes
+            - generic [ref=e137]: 4 hours ago | 0.06 KB
+          - listitem [ref=e138]:
+            - link "Hub Code" [ref=e139] [cursor=pointer]:
+              - /url: /YPU2Ajd0?source=public_pastes
+            - generic [ref=e140]: 15 hours ago | 1.88 KB
+          - listitem [ref=e141]:
+            - link "Amazon S&S Mass Cancel" [ref=e142] [cursor=pointer]:
+              - /url: /47BinQXH?source=public_pastes
+            - generic [ref=e143]: JavaScript | 1 day ago | 1.05 KB
+          - listitem [ref=e144]:
+            - link "Guesses Din wants to transfer" [ref=e145] [cursor=pointer]:
+              - /url: /2KwnjWv8?source=public_pastes
+            - generic [ref=e146]: 1 day ago | 1.32 KB
+  - generic [ref=e152]:
+    - link "Google Chrome Extension" [ref=e153] [cursor=pointer]:
+      - /url: /tools#chrome
+    - link "Firefox Extension" [ref=e154] [cursor=pointer]:
+      - /url: /tools#firefox
+    - link "iPhone/iPad Application" [ref=e155] [cursor=pointer]:
+      - /url: /tools#iphone
+    - link "Windows Desktop Application" [ref=e156] [cursor=pointer]:
+      - /url: /tools#windows
+    - link "Android Application" [ref=e157] [cursor=pointer]:
+      - /url: /tools#android
+    - link "MacOS X Widget" [ref=e158] [cursor=pointer]:
+      - /url: /tools#macos
+    - link "Opera Extension" [ref=e159] [cursor=pointer]:
+      - /url: /tools#opera
+    - link "Linux Application" [ref=e160] [cursor=pointer]:
+      - /url: /tools#pastebincl
+  - contentinfo [ref=e161]:
+    - generic [ref=e163]:
+      - generic [ref=e164]:
+        - link "create new paste" [ref=e165] [cursor=pointer]:
+          - /url: /
+        - text: /
+        - link "syntax languages" [ref=e166] [cursor=pointer]:
+          - /url: /languages
+        - text: /
+        - link "archive" [ref=e167] [cursor=pointer]:
+          - /url: /archive
+        - text: /
+        - link "faq" [ref=e168] [cursor=pointer]:
+          - /url: /faq
+        - text: /
+        - link "tools" [ref=e169] [cursor=pointer]:
+          - /url: /tools
+        - text: /
+        - link "night mode" [ref=e170] [cursor=pointer]:
+          - /url: /night_mode
+        - text: /
+        - link "api" [ref=e171] [cursor=pointer]:
+          - /url: /doc_api
+        - text: /
+        - link "scraping api" [ref=e172] [cursor=pointer]:
+          - /url: /doc_scraping_api
+        - text: /
+        - link "news" [ref=e173] [cursor=pointer]:
+          - /url: /news
+        - text: /
+        - link "pro" [ref=e174] [cursor=pointer]:
+          - /url: /pro
+        - link "privacy statement" [ref=e175] [cursor=pointer]:
+          - /url: /doc_privacy_statement
+        - text: /
+        - link "cookies policy" [ref=e176] [cursor=pointer]:
+          - /url: /doc_cookies_policy
+        - text: /
+        - link "terms of service" [ref=e177] [cursor=pointer]:
+          - /url: /doc_terms_of_service
+        - text: /
+        - link "security disclosure" [ref=e178] [cursor=pointer]:
+          - /url: /doc_security_disclosure
+        - text: /
+        - link "dmca" [ref=e179] [cursor=pointer]:
+          - /url: /dmca
+        - text: /
+        - link "report abuse" [ref=e180] [cursor=pointer]:
+          - /url: /report-abuse
+        - text: /
+        - link "contact" [ref=e181] [cursor=pointer]:
+          - /url: /contact
+        - generic [ref=e182]:
+          - text: By using Pastebin.com you agree to our
+          - link "cookies policy" [ref=e183] [cursor=pointer]:
+            - /url: /doc_cookies_policy
+          - text: to enhance your experience.
+          - text: Site design & logo © 2026 Pastebin
+      - generic [ref=e184]:
+        - link "Like us on Facebook" [ref=e185] [cursor=pointer]:
+          - /url: https://facebook.com/pastebin
+        - link "Follow us on Twitter" [ref=e186] [cursor=pointer]:
+          - /url: https://twitter.com/pastebin
+  - generic [ref=e187]:
+    - generic [ref=e188]:
+      - text: We use cookies for various purposes including analytics. By continuing to use Pastebin, you agree to our use of cookies as described in the
+      - link "Cookies Policy" [ref=e189] [cursor=pointer]:
+        - /url: /doc_cookies_policy
+      - text: . OK, I Understand
+    - generic [ref=e190]:
+      - link "Sign Up" [ref=e192] [cursor=pointer]:
+        - /url: /signup
+      - generic [ref=e193]:
+        - text: Not a member of Pastebin yet?
+        - link "Sign Up" [ref=e194] [cursor=pointer]:
+          - /url: /signup
+        - text: ", it unlocks many cool features!"
+      - generic "Close Me" [ref=e195] [cursor=pointer]

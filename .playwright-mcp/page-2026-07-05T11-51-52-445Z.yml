@@ -1,0 +1,24 @@
+- generic [ref=f683e2]:
+  - textbox "Paste Name / Title (optional)" [ref=f683e3]
+  - textbox [ref=f683e4]
+  - text: "Paste Expiration:"
+  - combobox "Paste Expiration:" [ref=f683e5]:
+    - option "Never" [selected]
+    - option "10 Minutes"
+    - option "1 Hour"
+    - option "1 Day"
+    - option "1 Week"
+    - option "1 Month"
+  - text: "Syntax Highlighting:"
+  - combobox "Syntax Highlighting:" [ref=f683e6]:
+    - option "Plain Text" [selected]
+    - option "Python"
+    - option "JavaScript"
+    - option "Bash"
+    - option "JSON"
+    - option "HTML"
+    - option "CSS"
+    - option "SQL"
+    - option "YAML"
+    - option "Markdown"
+  - button "Create paste" [ref=f683e7]

@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from aws_cdk import CfnOutput, RemovalPolicy, Stack
+from aws_cdk import aws_certificatemanager as acm
 from aws_cdk import aws_cloudfront as cloudfront
 from aws_cdk import aws_cloudfront_origins as origins
 from aws_cdk import aws_s3 as s3
@@ -18,9 +19,17 @@ class PastesEdgeStack(Stack):
         *,
         load_balancer,
         web_acl_arn: str,
+        domain_name: str | None = None,
+        certificate_arn: str | None = None,
         **kwargs,
     ) -> None:
         super().__init__(scope, construct_id, **kwargs)
+
+        certificate = (
+            acm.Certificate.from_certificate_arn(self, "PastesCertificate", certificate_arn)
+            if certificate_arn
+            else None
+        )
 
         static_bucket = s3.Bucket(
             self,
@@ -32,6 +41,8 @@ class PastesEdgeStack(Stack):
         self.distribution = cloudfront.Distribution(
             self,
             "PastesDistribution",
+            domain_names=[domain_name] if domain_name else None,
+            certificate=certificate,
             default_behavior=cloudfront.BehaviorOptions(
                 origin=origins.LoadBalancerV2Origin(
                     load_balancer,
@@ -49,6 +60,7 @@ class PastesEdgeStack(Stack):
             },
             web_acl_id=web_acl_arn,
         )
+        self.distribution.apply_removal_policy(RemovalPolicy.RETAIN)
 
         self.static_bucket = static_bucket
 

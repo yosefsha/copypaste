@@ -1,0 +1,196 @@
+ ▐▛███▜▌   Claude Code v2.1.201
+▝▜█████▛▘  Sonnet 5 · Claude Pro
+  ▘▘ ▝▝    ~/dev/copypaste
+
+ ▎ Fable 5 is back.
+ ▎ Until July 7, you can use up to 50% of your plan's weekly usage limit on Fable 5. If you hit your limit, you can continue on Fable 5 with usage credits. Fable 5 draws down usage faster than Opus 4.8. Learn more
+
+❯ explain Static assets & CDN in tasks file ? if we use ssr and jinja2 why this 
+  needed ? cand we keep statik files alongside the src files ?                  
+  ⎿  ⧉ Selected 1 lines from TASKS.md in Visual Studio Code - Insiders
+
+  Read 2 files, listed 2 directories (ctrl+o to expand)
+
+⏺ What "Static assets & CDN" (phase 5) means
+
+  Looking at TASKS.md:51-55 and ADR-005, the app has two kinds of responses:
+  - Dynamic, per-request (create form, view a paste, htmx fragments) — these hit
+  Flask on ECS Fargate, because they need DynamoDB reads/writes.
+  - Static, identical-for-everyone (style.css, pygments.css) — these never
+  change per request.
+
+  Phase 5 is about giving CloudFront two origins: S3 for the static files, and
+  the Fargate ALB (from ADR-005) for everything else — so CloudFront routes by
+  path/extension to the right backend.
+
+  Why this matters even with SSR + Jinja2
+
+  SSR (ADR-003) is about how HTML is rendered (server-side, no SPA/client
+  framework) — it says nothing about how CSS/JS files are delivered. Those are
+  separate concerns:
+
+  - Right now, Flask serves style.css/pygments.css itself via its default
+  static-file handler (src/copypaste/static/). Every request for that CSS is a
+  round-trip to a Fargate container, even though the file never changes.
+  - Serving unchanging bytes from S3+CloudFront edge caches instead means: fewer
+  requests hit Fargate (less compute to scale/pay for), lower latency for users
+  (served from the nearest edge location instead of one ALB region), and it
+  frees Fargate to focus purely on the DynamoDB-backed dynamic work it actually
+  needs to do.
+
+  So it's an infra/performance optimization layered on top of SSR, not a
+  contradiction of it — the rendering model stays server-side; only the delivery
+  path for the non-dynamic bytes changes.
+
+  Keeping static files alongside src/
+
+  Yes — and that's already the current setup (src/copypaste/static/pygments.css,
+  style.css) using Flask's default static folder, which is exactly what
+  TASKS.md:53 already decided ("plain CSS via Flask's default static folder...
+  no bundler"). That doesn't need to change for dev/local.
+
+  What phase 5 adds is a deploy-time step: as part of CI/CD (phase 8), sync
+  src/copypaste/static/* to the S3 bucket so CloudFront can serve it from there
+  in production. The repo's source of truth stays under src/; S3 just becomes a
+  deployment target, not a second place you hand-edit files.
+
+⏺ User answered Claude's questions:
+  ⎿  · That answers your question — do you want me to turn this into an 
+     implementation plan (e.g. for phase 5's S3/CloudFront tasks), or was this 
+     just for understanding? → lets skip that for now and keep the css in flask 
+     default folder. add a feature in features.md to add the cloudfront ans s3 
+     bucket serning. 
+
+  Read 1 file (ctrl+o to expand)
+
+⏺ Updated plan
+  ⎿  /plan to preview
+
+⏺ User approved Claude's plan
+  ⎿  Plan saved to: ~/.claude/plans/explain-static-assets-declarative-noodle.md 
+     · /plan to edit
+     Add "Static assets via S3 + CloudFront" as a deferred feature
+
+     Context
+
+     TASKS.md phase 5 ("Static assets & CDN") calls for provisioning an S3
+     bucket + CloudFront
+     distribution to serve static files (CSS), with Fargate/ALB as CloudFront's
+     second origin for
+     dynamic routes. The user has decided to keep serving CSS from Flask's
+     default static folder
+     (src/copypaste/static/) for now rather than standing up S3/CloudFront
+     immediately. To document
+     this as an intentional, revisitable scope decision — consistent with how
+     other out-of-scope work
+     is tracked — it should be recorded in Features.md alongside the existing
+     deferred features
+     (Mutability, S3 fallback for oversized pastes, Auth), rather than left as
+     an unchecked task with
+     no rationale.
+
+     Change
+
+     Add a new ## Static assets via S3 + CloudFront section to Features.md,
+     following the existing
+     format (short framing sentence + bullets on what it would touch). Content:
+
+     - State that static assets (style.css, pygments.css) are currently served
+     directly by Flask
+     from src/copypaste/static/ (its default static folder), which is sufficient
+     for current scale.
+     - Note the deferred future work: provisioning an S3 bucket for these
+     assets, and a CloudFront
+     distribution with two origins/behaviors — S3 for static paths, the ALB
+     (ADR-005) for dynamic
+     routes (create/view/htmx fragments).
+     - Note this is expected to touch: a deploy-time sync step (CI, phase 8 in
+     TASKS.md) to push
+     src/copypaste/static/* to S3 — the files stay authored under src/, only the
+     serving path
+     changes in production.
+
+     No other files need to change — TASKS.md phase 5 already exists as
+     unchecked tasks; this just
+     adds the "why we're not doing it now" note to Features.md per the user's
+     request. Not touching
+     TASKS.md itself since the user only asked for a Features.md entry.
+
+     Verification
+
+     Docs-only change — read back Features.md to confirm formatting matches the
+     existing sections
+     (heading level, prose style, bullet style).
+
+⏺ Update(Features.md)
+  ⎿  Added 10 lines
+      13  
+      14  Pastes over the size limit are currently rejected outright, dri
+          ven by DynamoDB's 400KB item size limit (`ADR-002`). A future v
+          ersion could store oversized paste bodies in S3 instead, with D
+          ynamoDB holding only metadata plus a pointer to the S3 object, 
+          removing the size cap for large pastes.
+      15  
+      16 +## Static assets via S3 + CloudFront                           
+      17 +                                                               
+      18 +Static assets (`style.css`, `pygments.css`) are currently serve
+         +d directly by Flask from                                       
+      19 +`src/copypaste/static/`, its default static folder — sufficient
+         + at current scale. A future version                            
+      20 +could provision an S3 bucket for these assets and a CloudFront 
+         +distribution with two                                          
+      21 +origins/behaviors: S3 for static paths, the ALB (`ADR-005`) for
+         + dynamic routes (create, view, htmx                            
+      22 +fragments). This is expected to touch:                         
+      23 +- A deploy-time sync step (CI, `TASKS.md` phase 8) to push `src
+         +/copypaste/static/*` to S3 — the                               
+      24 +  files stay authored under `src/`; only the serving path chang
+         +es in production.                                              
+      25 +                                                               
+      26  ## Auth
+      27  
+      28  The service is currently fully anonymous — no accounts, no sess
+          ions. A future version will add user accounts. This is expected
+           to touch:
+
+⏺ Added a "Static assets via S3 + CloudFront" section to Features.md, matching
+  the format of the existing entries — documenting that CSS stays served from
+  Flask's default static folder for now, with S3/CloudFront deferred until it's
+  actually needed.
+
+✻ Worked for 1m 9s
+
+❯ commit this                                                                   
+
+⏺ Bash(git status && echo ---- && git diff -- Features.md)
+  ⎿  On branch main
+     Your branch is up to date with 'origin/main'.
+     … +34 lines (ctrl+o to expand)
+
+⏺ We're currently on main, but this repo's convention (CLAUDE.md) is to make
+  each change on its own step/* branch rather than committing directly to main.
+
+⏺ User answered Claude's questions:
+  ⎿  · We're on main right now. Commit directly to main, or create a step branch
+     first (matching this repo's usual workflow)? → Commit to main
+
+⏺ Bash(git add Features.md && git commit -m "$(cat <<'EOF'
+      Document static assets S3+CloudFront serving as a deferred feature…)
+  ⎿  [main f8b913a] Document static assets S3+CloudFront serving as a defer
+     red feature
+      1 file changed, 10 insertions(+)
+
+⏺ Committed f8b913a on main — only Features.md (the other unrelated modified
+  files like TASKS.md and compact-transcript-export.log were left untouched, as
+  they're out of scope for this change).
+
+✻ Worked for 24s
+
+❯ push it                                                                       
+
+⏺ Bash(git push origin main)
+  ⎿  To https://github.com/yosefsha/copypaste.git
+        dff9c22..f8b913a  main -> main
+
+⏺ Pushed to origin/main (dff9c22..f8b913a).
+✻ Worked for 6s

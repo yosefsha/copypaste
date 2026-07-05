@@ -1,0 +1,32 @@
+- generic [active] [ref=f108e1]:
+  - banner [ref=f108e2]:
+    - link "copypaste" [ref=f108e3] [cursor=pointer]:
+      - /url: /
+  - main [ref=f108e4]:
+    - generic [ref=f108e6]:
+      - textbox "Paste Name / Title (optional)" [ref=f108e7]
+      - textbox [ref=f108e8]
+      - generic [ref=f108e9]:
+        - generic [ref=f108e10]:
+          - generic [ref=f108e11]: "Paste Expiration:"
+          - combobox "Paste Expiration:" [ref=f108e12]:
+            - option "Never" [selected]
+            - option "10 Minutes"
+            - option "1 Hour"
+            - option "1 Day"
+            - option "1 Week"
+            - option "1 Month"
+        - generic [ref=f108e13]:
+          - generic [ref=f108e14]: "Syntax Highlighting:"
+          - combobox "Syntax Highlighting:" [ref=f108e15]:
+            - option "Plain Text" [selected]
+            - option "Python"
+            - option "JavaScript"
+            - option "Bash"
+            - option "JSON"
+            - option "HTML"
+            - option "CSS"
+            - option "SQL"
+            - option "YAML"
+            - option "Markdown"
+      - button "Create paste" [ref=f108e16] [cursor=pointer]

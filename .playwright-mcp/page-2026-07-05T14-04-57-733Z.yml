@@ -1,0 +1,13 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - link "copypaste" [ref=e3] [cursor=pointer]:
+      - /url: /
+  - main [ref=e4]:
+    - generic [ref=e5]:
+      - heading "DA4UAtH" [level=1] [ref=e6]
+      - generic [ref=e7]:
+        - link "raw" [ref=e8] [cursor=pointer]:
+          - /url: /raw/DA4UAtH
+        - button "copy" [ref=e9] [cursor=pointer]
+        - button "copy url" [ref=e10]
+    - generic [ref=e12]: hello from playwright test

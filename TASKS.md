@@ -69,7 +69,8 @@ Step-by-step implementation plan derived from the decisions in `docs/adr/`. Orga
 
 - [ ] Set up CI to run unit + integration tests on every push.
 - [ ] Set up build/push of the container image to a registry (e.g. ECR).
-- [x] Set up deployment of infra and app releases to Fargate via **AWS CDK (Python)** — IaC tool decided (was TBD, see `ADR-007`). `cdk/` directory, dependencies in the root `pyproject.toml`'s `cdk` dependency group (single shared `.venv`). Stacks: `PastesDataStack` (DynamoDB), `PastesNetworkStack` (VPC, no NAT gateway — public subnets + security group locked to CloudFront's origin-facing prefix list), `PastesComputeStack` (ECR image asset built from the existing `Dockerfile`, ECS/Fargate, ALB), `PastesWafStack` (WAFv2 Web ACL, rate-based rule on the create route), `PastesEdgeStack` (CloudFront, default `*.cloudfront.net` domain — custom domain/DNS explicitly out of scope, S3 static origin).
+- [x] Set up deployment of infra and app releases to Fargate via **AWS CDK (Python)** — IaC tool decided (was TBD, see `ADR-007`). `cdk/` directory, dependencies in the root `pyproject.toml`'s `cdk` dependency group (single shared `.venv`). Stacks: `PastesDataStack` (DynamoDB), `PastesNetworkStack` (VPC, no NAT gateway — public subnets + security group locked to CloudFront's origin-facing prefix list), `PastesComputeStack` (ECR image asset built from the existing `Dockerfile`, ECS/Fargate, ALB), `PastesWafStack` (WAFv2 Web ACL, rate-based rule on the create route), `PastesEdgeStack` (CloudFront, S3 static origin).
+- [x] Custom domain for the CloudFront distribution — `paste.yossidemo.click`, ACM certificate (`us-east-1`, required region for CloudFront) validated via Route53 DNS record, `domain_name`/`certificate_arn` wired into `PastesEdgeStack` and hardcoded in `cdk/app.py`. Route53 alias (A/AAAA) record points the subdomain at the distribution.
 
 ## Deferred (see `Features.md`)
 

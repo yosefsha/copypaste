@@ -1,0 +1,32 @@
+- generic [ref=f687e1]:
+  - banner [ref=f687e2]:
+    - link "copypaste" [ref=f687e3] [cursor=pointer]:
+      - /url: /
+  - main [ref=f687e4]:
+    - generic [ref=f687e6]:
+      - textbox "Paste Name / Title (optional)" [ref=f687e7]: My First Paste
+      - textbox [active] [ref=f687e8]: "def greet(name): print(f\"hello, {name}\") greet(\"world\")"
+      - generic [ref=f687e9]:
+        - generic [ref=f687e10]:
+          - generic [ref=f687e11]: "Paste Expiration:"
+          - combobox "Paste Expiration:" [ref=f687e12]:
+            - option "Never" [selected]
+            - option "10 Minutes"
+            - option "1 Hour"
+            - option "1 Day"
+            - option "1 Week"
+            - option "1 Month"
+        - generic [ref=f687e13]:
+          - generic [ref=f687e14]: "Syntax Highlighting:"
+          - combobox "Syntax Highlighting:" [ref=f687e15]:
+            - option "Plain Text"
+            - option "Python" [selected]
+            - option "JavaScript"
+            - option "Bash"
+            - option "JSON"
+            - option "HTML"
+            - option "CSS"
+            - option "SQL"
+            - option "YAML"
+            - option "Markdown"
+      - button "Create paste" [ref=f687e16] [cursor=pointer]

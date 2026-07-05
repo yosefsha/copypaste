@@ -32,6 +32,8 @@ edge_stack = PastesEdgeStack(
     "PastesEdgeStack",
     load_balancer=compute_stack.load_balancer,
     web_acl_arn=waf_stack.web_acl.attr_arn,
+    domain_name="paste.yossidemo.click",
+    certificate_arn="arn:aws:acm:us-east-1:963352896991:certificate/2fac63ac-2858-4d7e-bd8e-b1b4e1c93d59",
     env=env,
 )
 

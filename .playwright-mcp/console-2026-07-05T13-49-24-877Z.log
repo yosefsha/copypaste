@@ -1,0 +1,8 @@
+[     911ms] [LOG] Version: 1.0.0 - Time: 6/11/2026, 9:26:17 AM API @ https://services.vlitag.com/adv1/?q=adf050ece17b957604b4bbfc1829059f:7
+[    1179ms] [WARNING] [GPT] PubAdsService.enableLazyLoad is deprecated, use googletag.setConfig({lazyLoad: ...}) instead.
+https://goo.gle/gpt-message#170 @ https://pagead2.googlesyndication.com/pagead/managed/js/gpt/m202606250101/pubads_impl.js?cb=31099434:18
+[    6502ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://test.com/?coppa=&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&usp=:0
+[    6703ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://eb2.3lift.com/getuid?gdpr=0&gdpr_consent=&redir=https%3A%2F%2Fvisitor.us-west1.gcp.omnitagjs.com%2Fvisitor%2Fsync%3Fgdpr%3D0%26gdpr_consent%3D%26is_cookie_sync_uid%3D1%26name%3DTRIPLELIFT_cookie_sync%26ttl%3D720%26uid%3D771bebe2d6221e9ca65e16ebf8d2f6f3%26visitor%3D%24UID:0
+[    6961ms] [ERROR] Failed to load resource: net::ERR_CONNECTION_RESET @ https://pxl.iqm.com/i/ck/equativ?cid=SMART_USER_ID&redir=https%3A%2F%2Frtb-csync.smartadserver.com%2Fredir%2F%3Fissi%3D1%26partnerid%3D154%26partneruserid%3D%7BIQM_COOKIE%7D&gdpr=0&gdpr_consent=:0
+[    6502ms] [ERROR] Failed to load resource: net::ERR_NAME_NOT_RESOLVED @ https://test.com/?coppa=&gdpr=0&gdpr_consent=&gpp=&gpp_sid=&usp=:0
+[    6703ms] [ERROR] Failed to load resource: the server responded with a status of 400 () @ https://eb2.3lift.com/getuid?gdpr=0&gdpr_consent=&redir=https%3A%2F%2Fvisitor.us-west1.gcp.omnitagjs.com%2Fvisitor%2Fsync%3Fgdpr%3D0%26gdpr_consent%3D%26is_cookie_sync_uid%3D1%26name%3DTRIPLELIFT_cookie_sync%26ttl%3D720%26uid%3D771bebe2d6221e9ca65e16ebf8d2f6f3%26visitor%3D%24UID:0

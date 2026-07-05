@@ -1,0 +1,273 @@
+- generic [active] [ref=f671e1]:
+  - generic [ref=f671e2]:
+    - generic [ref=f671e5]:
+      - generic [ref=f671e6]:
+        - link "Pastebin" [ref=f671e7] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f671e8]:
+          - link "API" [ref=f671e9] [cursor=pointer]:
+            - /url: /doc_api
+          - link "tools" [ref=f671e10] [cursor=pointer]:
+            - /url: /tools
+          - link "faq" [ref=f671e11] [cursor=pointer]:
+            - /url: /faq
+        - link "paste" [ref=f671e12] [cursor=pointer]:
+          - /url: /
+        - generic [ref=f671e14]:
+          - textbox "Search..." [ref=f671e15]
+          - button "Search" [ref=f671e16] [cursor=pointer]:
+            - img [ref=f671e17]
+      - generic [ref=f671e20]:
+        - link "Login" [ref=f671e21] [cursor=pointer]:
+          - /url: /login
+        - link "Sign up" [ref=f671e22] [cursor=pointer]:
+          - /url: /signup
+    - generic [ref=f671e23]:
+      - generic [ref=f671e24]:
+        - paragraph [ref=f671e32]: Ad
+        - generic [ref=f671e33]:
+          - generic [ref=f671e34]:
+            - generic [ref=f671e35]:
+              - generic "Share on Facebook!" [ref=f671e36] [cursor=pointer]:
+                - generic [ref=f671e37]: SHARE
+              - generic "Share on Twitter!" [ref=f671e38] [cursor=pointer]:
+                - generic [ref=f671e39]: TWEET
+            - img "FairyRose" [ref=f671e41]
+            - generic [ref=f671e42]:
+              - heading "Hub Code" [level=1] [ref=f671e44]
+              - generic [ref=f671e45]:
+                - link "FairyRose" [ref=f671e47] [cursor=pointer]:
+                  - /url: /u/FairyRose
+                - link "PRO User!" [ref=f671e48] [cursor=pointer]:
+                  - /url: /pro
+                - 'link "Send a private message to: FairyRose" [ref=f671e49] [cursor=pointer]':
+                  - /url: /message/compose?to=FairyRose
+                - generic [ref=f671e50]: Jul 4th, 2026
+                - generic "Unique visits to this paste" [ref=f671e51]: 1,806
+                - generic "Rating" [ref=f671e52]: "0"
+                - generic "When this paste gets automatically deleted" [ref=f671e53]: Never
+                - generic "Comments" [ref=f671e54]:
+                  - link "Add comment" [ref=f671e55] [cursor=pointer]:
+                    - /url: /login?return_url=%2FYPU2Ajd0%23add_comment
+          - generic [ref=f671e58]:
+            - text: Not a member of Pastebin yet?
+            - link "Sign Up" [ref=f671e59] [cursor=pointer]:
+              - /url: /signup
+              - generic [ref=f671e60]: Sign Up
+            - text: ", it unlocks many cool features!"
+          - generic [ref=f671e61]:
+            - generic [ref=f671e62]:
+              - generic [ref=f671e63]:
+                - link "text" [ref=f671e64] [cursor=pointer]:
+                  - /url: /archive/text
+                - text: 1.88 KB | None |
+                - link "0" [ref=f671e65] [cursor=pointer]:
+                  - /url: /login?return_url=%2FYPU2Ajd0
+                - link "0" [ref=f671e66] [cursor=pointer]:
+                  - /url: /login?return_url=%2FYPU2Ajd0
+              - generic [ref=f671e67]:
+                - link "raw" [ref=f671e68] [cursor=pointer]:
+                  - /url: /raw/YPU2Ajd0
+                - link "download" [ref=f671e69] [cursor=pointer]:
+                  - /url: /dl/YPU2Ajd0
+                - link "clone" [ref=f671e70] [cursor=pointer]:
+                  - /url: /clone/YPU2Ajd0
+                - link "embed" [ref=f671e71] [cursor=pointer]:
+                  - /url: /embed/YPU2Ajd0
+                - link "print" [ref=f671e72] [cursor=pointer]:
+                  - /url: /print/YPU2Ajd0
+                - link "report" [ref=f671e73] [cursor=pointer]:
+                  - /url: /report/YPU2Ajd0
+            - list [ref=f671e75]:
+              - listitem [ref=f671e76]
+              - listitem [ref=f671e78]:
+                - generic [ref=f671e79]: "[center][color=white][collapse=Group 1][center][hr]"
+              - listitem [ref=f671e80]:
+                - generic [ref=f671e81]: "[big]Canon[/big]"
+              - listitem [ref=f671e82]:
+                - generic [ref=f671e83]: "[eicon]borderleft[/eicon][eicon]vapsmile[/eicon][eicon]joltjoyous[/eicon][eicon]flareonjoyous[/eicon][eicon]borderright[/eicon]"
+              - listitem [ref=f671e84]:
+                - generic [ref=f671e85]: "[eicon]borderleft[/eicon][eicon]eevee cheer[/eicon][eicon]espeonjoy[/eicon][eicon]umbjoyous[/eicon][eicon]borderright[/eicon]"
+              - listitem [ref=f671e86]:
+                - generic [ref=f671e87]: "[eicon]borderleft[/eicon][eicon]leafeon joyous[/eicon][eicon]glacejoyous[/eicon][eicon]sylvjoyous[/eicon][eicon]borderright[/eicon]"
+              - listitem [ref=f671e88]:
+                - generic [ref=f671e89]: "[hr][small] Character Name, Character Name, Character Name"
+              - listitem [ref=f671e90]:
+                - generic [ref=f671e91]: Character Name, Character Name, Character Name
+              - listitem [ref=f671e92]:
+                - generic [ref=f671e93]: Character Name, Character Name, Character Name [/small][hr][/center][/collapse][collapse=Group 2][center][hr]
+              - listitem [ref=f671e94]:
+                - generic [ref=f671e95]: "[big]Canon[/big]"
+              - listitem [ref=f671e96]
+              - listitem [ref=f671e98]:
+                - generic [ref=f671e99]: "[eicon]borderleft[/eicon][eicon]vapsmile[/eicon][eicon]joltjoyous[/eicon][eicon]flareonjoyous[/eicon][eicon]borderright[/eicon]"
+              - listitem [ref=f671e100]:
+                - generic [ref=f671e101]: "[eicon]borderleft[/eicon][eicon]eevee cheer[/eicon][eicon]espeonjoy[/eicon][eicon]umbjoyous[/eicon][eicon]borderright[/eicon]"
+              - listitem [ref=f671e102]:
+                - generic [ref=f671e103]: "[eicon]borderleft[/eicon][eicon]leafeon joyous[/eicon][eicon]glacejoyous[/eicon][eicon]sylvjoyous[/eicon][eicon]borderright[/eicon]"
+              - listitem [ref=f671e104]:
+                - generic [ref=f671e105]: "[hr][small] Character Name, Character Name, Character Name"
+              - listitem [ref=f671e106]:
+                - generic [ref=f671e107]: Character Name, Character Name, Character Name
+              - listitem [ref=f671e108]:
+                - generic [ref=f671e109]: Character Name, Character Name, Character Name [/small][hr][/center][/collapse][collapse=Group 3][center][hr]
+              - listitem [ref=f671e110]:
+                - generic [ref=f671e111]: "[big]Canon[/big]"
+              - listitem [ref=f671e112]
+              - listitem [ref=f671e114]:
+                - generic [ref=f671e115]: "[eicon]borderleft[/eicon][eicon]vapsmile[/eicon][eicon]joltjoyous[/eicon][eicon]flareonjoyous[/eicon][eicon]borderright[/eicon]"
+              - listitem [ref=f671e116]:
+                - generic [ref=f671e117]: "[eicon]borderleft[/eicon][eicon]eevee cheer[/eicon][eicon]espeonjoy[/eicon][eicon]umbjoyous[/eicon][eicon]borderright[/eicon]"
+              - listitem [ref=f671e118]:
+                - generic [ref=f671e119]: "[eicon]borderleft[/eicon][eicon]leafeon joyous[/eicon][eicon]glacejoyous[/eicon][eicon]sylvjoyous[/eicon][eicon]borderright[/eicon]"
+              - listitem [ref=f671e120]:
+                - generic [ref=f671e121]: "[hr][small] Character Name, Character Name, Character Name"
+              - listitem [ref=f671e122]:
+                - generic [ref=f671e123]: Character Name, Character Name, Character Name
+              - listitem [ref=f671e124]:
+                - generic [ref=f671e125]: Character Name, Character Name, Character Name [/small][hr][/center][/collapse][/color][/center]
+          - generic [ref=f671e126]:
+            - generic [ref=f671e127]: Advertisement
+            - paragraph [ref=f671e134]: Ad
+          - generic [ref=f671e136]:
+            - generic [ref=f671e137]: Add Comment
+            - generic [ref=f671e139]:
+              - text: Please,
+              - link "Sign In" [ref=f671e140] [cursor=pointer]:
+                - /url: /login?return_url=%2FYPU2Ajd0%23add_comment
+                - generic [ref=f671e141]: Sign In
+              - text: to add comment
+      - generic [ref=f671e142]:
+        - link "Public Pastes" [ref=f671e144] [cursor=pointer]:
+          - /url: /archive
+        - list [ref=f671e145]:
+          - listitem [ref=f671e146]:
+            - link "z66is_archive.zip.txt" [ref=f671e147] [cursor=pointer]:
+              - /url: /y8NRZxjX?source=public_pastes
+            - generic [ref=f671e148]: 2 hours ago | 2.73 KB
+          - listitem [ref=f671e149]:
+            - link "THUMBS UP" [ref=f671e150] [cursor=pointer]:
+              - /url: /r3xibuc2?source=public_pastes
+            - generic [ref=f671e151]: 3 hours ago | 0.08 KB
+          - listitem [ref=f671e152]:
+            - link "https://web.archive.org/web/https://pastebin...." [ref=f671e153] [cursor=pointer]:
+              - /url: /yMgJmy4C?source=public_pastes
+            - generic [ref=f671e154]: 3 hours ago | 0.07 KB
+          - listitem [ref=f671e155]:
+            - link "PREPEND THIS:" [ref=f671e156] [cursor=pointer]:
+              - /url: /AXvTMeHV?source=public_pastes
+            - generic [ref=f671e157]: 3 hours ago | 0.07 KB
+          - listitem [ref=f671e158]:
+            - link "ADD THIS:" [ref=f671e159] [cursor=pointer]:
+              - /url: /xZvayL7A?source=public_pastes
+            - generic [ref=f671e160]: 4 hours ago | 0.06 KB
+          - listitem [ref=f671e161]:
+            - link "Hub Code" [ref=f671e162] [cursor=pointer]:
+              - /url: /YPU2Ajd0?source=public_pastes
+            - generic [ref=f671e163]: 15 hours ago | 1.88 KB
+          - listitem [ref=f671e164]:
+            - link "Amazon S&S Mass Cancel" [ref=f671e165] [cursor=pointer]:
+              - /url: /47BinQXH?source=public_pastes
+            - generic [ref=f671e166]: JavaScript | 1 day ago | 1.05 KB
+          - listitem [ref=f671e167]:
+            - link "Guesses Din wants to transfer" [ref=f671e168] [cursor=pointer]:
+              - /url: /2KwnjWv8?source=public_pastes
+            - generic [ref=f671e169]: 1 day ago | 1.32 KB
+        - generic [ref=f671e170]:
+          - paragraph [ref=f671e178]: Ad
+          - paragraph [ref=f671e186]: Ad
+  - generic [ref=f671e187]:
+    - link "Google Chrome Extension" [ref=f671e188] [cursor=pointer]:
+      - /url: /tools#chrome
+    - link "Firefox Extension" [ref=f671e189] [cursor=pointer]:
+      - /url: /tools#firefox
+    - link "iPhone/iPad Application" [ref=f671e190] [cursor=pointer]:
+      - /url: /tools#iphone
+    - link "Windows Desktop Application" [ref=f671e191] [cursor=pointer]:
+      - /url: /tools#windows
+    - link "Android Application" [ref=f671e192] [cursor=pointer]:
+      - /url: /tools#android
+    - link "MacOS X Widget" [ref=f671e193] [cursor=pointer]:
+      - /url: /tools#macos
+    - link "Opera Extension" [ref=f671e194] [cursor=pointer]:
+      - /url: /tools#opera
+    - link "Linux Application" [ref=f671e195] [cursor=pointer]:
+      - /url: /tools#pastebincl
+  - contentinfo [ref=f671e196]:
+    - generic [ref=f671e198]:
+      - generic [ref=f671e199]:
+        - link "create new paste" [ref=f671e200] [cursor=pointer]:
+          - /url: /
+        - text: /
+        - link "syntax languages" [ref=f671e201] [cursor=pointer]:
+          - /url: /languages
+        - text: /
+        - link "archive" [ref=f671e202] [cursor=pointer]:
+          - /url: /archive
+        - text: /
+        - link "faq" [ref=f671e203] [cursor=pointer]:
+          - /url: /faq
+        - text: /
+        - link "tools" [ref=f671e204] [cursor=pointer]:
+          - /url: /tools
+        - text: /
+        - link "night mode" [ref=f671e205] [cursor=pointer]:
+          - /url: /night_mode
+        - text: /
+        - link "api" [ref=f671e206] [cursor=pointer]:
+          - /url: /doc_api
+        - text: /
+        - link "scraping api" [ref=f671e207] [cursor=pointer]:
+          - /url: /doc_scraping_api
+        - text: /
+        - link "news" [ref=f671e208] [cursor=pointer]:
+          - /url: /news
+        - text: /
+        - link "pro" [ref=f671e209] [cursor=pointer]:
+          - /url: /pro
+        - link "privacy statement" [ref=f671e210] [cursor=pointer]:
+          - /url: /doc_privacy_statement
+        - text: /
+        - link "cookies policy" [ref=f671e211] [cursor=pointer]:
+          - /url: /doc_cookies_policy
+        - text: /
+        - link "terms of service" [ref=f671e212] [cursor=pointer]:
+          - /url: /doc_terms_of_service
+        - text: /
+        - link "security disclosure" [ref=f671e213] [cursor=pointer]:
+          - /url: /doc_security_disclosure
+        - text: /
+        - link "dmca" [ref=f671e214] [cursor=pointer]:
+          - /url: /dmca
+        - text: /
+        - link "report abuse" [ref=f671e215] [cursor=pointer]:
+          - /url: /report-abuse
+        - text: /
+        - link "contact" [ref=f671e216] [cursor=pointer]:
+          - /url: /contact
+        - generic [ref=f671e217]:
+          - text: By using Pastebin.com you agree to our
+          - link "cookies policy" [ref=f671e218] [cursor=pointer]:
+            - /url: /doc_cookies_policy
+          - text: to enhance your experience.
+          - text: Site design & logo © 2026 Pastebin
+      - generic [ref=f671e219]:
+        - link "Like us on Facebook" [ref=f671e220] [cursor=pointer]:
+          - /url: https://facebook.com/pastebin
+        - link "Follow us on Twitter" [ref=f671e221] [cursor=pointer]:
+          - /url: https://twitter.com/pastebin
+  - generic [ref=f671e222]:
+    - generic [ref=f671e223]:
+      - text: We use cookies for various purposes including analytics. By continuing to use Pastebin, you agree to our use of cookies as described in the
+      - link "Cookies Policy" [ref=f671e224] [cursor=pointer]:
+        - /url: /doc_cookies_policy
+      - text: . OK, I Understand
+    - generic [ref=f671e225]:
+      - link "Sign Up" [ref=f671e227] [cursor=pointer]:
+        - /url: /signup
+      - generic [ref=f671e228]:
+        - text: Not a member of Pastebin yet?
+        - link "Sign Up" [ref=f671e229] [cursor=pointer]:
+          - /url: /signup
+        - text: ", it unlocks many cool features!"
+      - generic "Close Me" [ref=f671e230] [cursor=pointer]
