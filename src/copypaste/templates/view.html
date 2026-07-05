@@ -6,21 +6,29 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="{{ paste.title or "copypaste" }}">
   <meta property="og:description" content="{{ paste.content[:200] }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   {% if highlighted %}<link rel="stylesheet" href="{{ url_for('static', filename='pygments.css') }}">{% endif %}
 </head>
 <body>
-  {% if paste.title %}<h1>{{ paste.title }}</h1>{% endif %}
-  <div class="paste-actions">
-    <a href="{{ url_for('raw_paste', paste_id=paste_id) }}">raw</a>
-    <button type="button" id="copy-button">copy</button>
-  </div>
-  <div id="paste-content">
-    {% if highlighted %}
-      {{ highlighted | safe }}
-    {% else %}
-      <pre>{{ paste.content }}</pre>
-    {% endif %}
-  </div>
+  <header class="topbar">
+    <a class="brand" href="{{ url_for('create_form') }}">copy<span>paste</span></a>
+  </header>
+  <main>
+    <div class="paste-header">
+      <h1>{{ paste.title or paste_id }}</h1>
+      <div class="paste-actions">
+        <a href="{{ url_for('raw_paste', paste_id=paste_id) }}">raw</a>
+        <button type="button" id="copy-button">copy</button>
+      </div>
+    </div>
+    <div id="paste-content">
+      {% if highlighted %}
+        {{ highlighted | safe }}
+      {% else %}
+        <pre>{{ paste.content }}</pre>
+      {% endif %}
+    </div>
+  </main>
   <script>
     document.getElementById("copy-button").addEventListener("click", function () {
       var text = document.getElementById("paste-content").textContent;
