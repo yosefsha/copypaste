@@ -154,7 +154,7 @@ def test_raw_view_returns_404_for_expired_paste(client, dynamodb_table):
     assert response.status_code == 404
 
 
-def test_view_paste_page_links_to_raw_view_and_has_copy_button(client, dynamodb_table):
+def test_view_paste_page_links_to_raw_view_and_has_copy_buttons(client, dynamodb_table):
     paste_id = db.put_paste(dynamodb_table, "hello world")
 
     response = client.get(f"/{paste_id}")
@@ -162,3 +162,4 @@ def test_view_paste_page_links_to_raw_view_and_has_copy_button(client, dynamodb_
 
     assert f'href="/raw/{paste_id}"' in html
     assert 'id="copy-button"' in html
+    assert 'id="copy-url-button"' in html

@@ -19,6 +19,7 @@
       <div class="paste-actions">
         <a href="{{ url_for('raw_paste', paste_id=paste_id) }}">raw</a>
         <button type="button" id="copy-button">copy</button>
+        <button type="button" id="copy-url-button">copy url</button>
       </div>
     </div>
     <div id="paste-content">
@@ -30,13 +31,22 @@
     </div>
   </main>
   <script>
+    function flashCopied(button) {
+      var original = button.textContent;
+      button.textContent = "copied!";
+      setTimeout(function () { button.textContent = original; }, 1500);
+    }
+
     document.getElementById("copy-button").addEventListener("click", function () {
       var text = document.getElementById("paste-content").textContent;
       navigator.clipboard.writeText(text).then(function () {
-        var button = document.getElementById("copy-button");
-        var original = button.textContent;
-        button.textContent = "copied!";
-        setTimeout(function () { button.textContent = original; }, 1500);
+        flashCopied(document.getElementById("copy-button"));
+      });
+    });
+
+    document.getElementById("copy-url-button").addEventListener("click", function () {
+      navigator.clipboard.writeText(window.location.href).then(function () {
+        flashCopied(document.getElementById("copy-url-button"));
       });
     });
   </script>
